@@ -80,6 +80,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 Interact with the frontend application through your web browser to upload PDFs and perform searches. The interface communicates with the FastAPI backend to provide a seamless user experience.
 
+## What to improve
+
+- **Vectorization & Similarity Search:** The system currently has some weird quirks that affects the search performances, such as a dependancy on the length of the document. Further research on vectorization methods would improve the performances.
+- **PDF Management:** Some QOL could be implemented, such as the options to rename or delete a PDF from the database.
+- **Snippet proposition:** Currently the system doesn't make snippet proposition if it doen't find words from the query in the PDFs. An idea would be to segment the texts in chunks and propose the closest chunk to the query. 
+
 ## Development
 
 For development purposes, you can make changes to the FastAPI backend or the React frontend. The changes will be reflected upon rebuilding the Docker containers.
