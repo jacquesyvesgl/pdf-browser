@@ -1,0 +1,27 @@
+FROM python:3.8
+
+WORKDIR /server
+
+# Install requirements
+COPY ./server/requirements.txt /server/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install Uvicorn globally
+RUN pip install uvicorn
+
+# Copy the rest of the application
+COPY ./server /server/
+
+# Create necessary directories
+RUN mkdir -p /server/node/index /server/node/extracted_texts /server/node/files
+
+# Set environment variables
+ENV UVICORN_ENV="production"
+ENV PYTHONUNBUFFERED=1
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Use ENTRYPOINT and CMD to start Uvicorn
+ENTRYPOINT ["uvicorn"]
+CMD ["src.api:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
